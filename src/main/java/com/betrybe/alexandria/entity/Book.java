@@ -1,41 +1,83 @@
 package com.betrybe.alexandria.entity;
 
+/**
+ * The type Book.
+ */
 public class Book {
 
-    private Long id;
+  private Long id;
 
-    private String title;
-    private String genre;
+  private String title;
+  private String genre;
 
-    public Book() {
-    }
+  /**
+   * Instantiates a new Book.
+   */
+  public Book() {
+  }
 
-    public Book(String title, String genre) {
-        this.title = title;
-        this.genre = genre;
-    }
+  /**
+   * Instantiates a new Book.
+   *
+   * @param title the title
+   * @param genre the genre
+   */
+  public Book(String title, String genre) {
+    this.title = title;
+    this.genre = genre;
+  }
 
-    public Long getId() {
-        return id;
-    }
+  /**
+   * Gets id.
+   *
+   * @return the id
+   */
+  public Long getId() {
+    return id;
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  /**
+   * Sets id.
+   *
+   * @param id the id
+   */
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public String getTitle() {
-        return title;
-    }
+  /**
+   * Gets title.
+   *
+   * @return the title
+   */
+  public String getTitle() {
+    return title;
+  }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+  /**
+   * Sets title.
+   *
+   * @param title the title
+   */
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-    public String getGenre() {
-        return genre;
-    }
+  /**
+   * Gets genre.
+   *
+   * @return the genre
+   */
+  public String getGenre() {
+    return genre;
+  }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
+  /**
+   * Sets genre.
+   *
+   * @param genre the genre
+   */
+  public void setGenre(String genre) {
+    this.genre = genre;
+  }
 }
