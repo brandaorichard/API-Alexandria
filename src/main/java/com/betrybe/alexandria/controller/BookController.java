@@ -19,17 +19,32 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 
+/**
+ * The type Book controller.
+ */
 @RestController
 @RequestMapping(value = "/books")
 public class BookController {
 
   private final BookService bookService;
 
+  /**
+   * Instantiates a new Book controller.
+   *
+   * @param bookService the book service
+   */
   @Autowired
   public BookController(BookService bookService) {
     this.bookService = bookService;
   }
 
+  /**
+   * Gets book id.
+   *
+   * @param id the id
+   * @return the book id
+   * @throws BookNotFoundException the book not found exception
+   */
   @GetMapping("/{id}")
   public BookDto getBookId(@PathVariable Long id) throws BookNotFoundException {
     return BookDto.from(
@@ -37,6 +52,11 @@ public class BookController {
     );
   }
 
+  /**
+   * Gets all books.
+   *
+   * @return the all books
+   */
   @GetMapping
   public List<BookDto> getAllBooks() {
     List<Book> books = bookService.findAll();
@@ -45,6 +65,12 @@ public class BookController {
         .toList();
   }
 
+  /**
+   * Create book book dto.
+   *
+   * @param bookCreationDto the book creation dto
+   * @return the book dto
+   */
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public BookDto createBook(@RequestBody BookCreationDto bookCreationDto) {
@@ -53,6 +79,14 @@ public class BookController {
     );
   }
 
+  /**
+   * Update book book dto.
+   *
+   * @param id                 the id
+   * @param bookCreationDtoDto the book creation dto dto
+   * @return the book dto
+   * @throws BookNotFoundException the book not found exception
+   */
   @PutMapping("/{id}")
   public BookDto updateBook(
       @PathVariable Long id,
@@ -62,6 +96,13 @@ public class BookController {
     );
   }
 
+  /**
+   * Delete book book dto.
+   *
+   * @param id the id
+   * @return the book dto
+   * @throws BookNotFoundException the book not found exception
+   */
   @DeleteMapping("/{id}")
   public BookDto deleteBook(@PathVariable Long id) throws BookNotFoundException {
     return BookDto.from(
