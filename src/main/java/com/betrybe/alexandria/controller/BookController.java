@@ -9,6 +9,8 @@ import com.betrybe.alexandria.service.BookService;
 import com.betrybe.alexandria.service.exception.BookDetailNotFoundException;
 import com.betrybe.alexandria.service.exception.BookNotFoundException;
 import java.util.List;
+
+import com.betrybe.alexandria.service.exception.PublisherNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -104,5 +106,16 @@ public class BookController {
     return BookDetailDto.fromEntity(
         bookService.removeBookDetail(bookId)
     );
+  }
+
+  @PutMapping("/{bookId}/publisher/{publisherId}")
+  public BookDto setBookPublisher(@PathVariable Long bookId, @PathVariable Long publisherId)
+      throws BookNotFoundException, PublisherNotFoundException {
+    return BookDto.from(bookService.setBookPublisher(bookId, publisherId));
+  }
+
+  @DeleteMapping("/{bookId}/publisher")
+  public BookDto removeBookPublisher(@PathVariable Long bookId) throws BookNotFoundException {
+    return BookDto.from(bookService.removeBookPublisher(bookId));
   }
 }
