@@ -66,4 +66,44 @@ public class BookDetail {
   public void setBook(Book book) {
     this.book = book;
   }
+
+  public String getSummary() {
+    return summary;
+  }
+
+  public void setSummary(String summary) {
+    this.summary = summary;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public Integer getPageCount() {
+    return pageCount;
+  }
+
+  public void setPageCount(Integer pageCount) {
+    this.pageCount = pageCount;
+  }
+
+  public String getYear() {
+    return year;
+  }
+
+  public void setYear(String year) {
+    this.year = year;
+  }
+
+  public String getIsbn() {
+    return isbn;
+  }
+
+  public void setIsbn(String isbn) {
+    this.isbn = isbn;
+  }
 }
