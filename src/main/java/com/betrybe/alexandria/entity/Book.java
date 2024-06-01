@@ -25,10 +25,20 @@ public class Book {
   @OneToOne(cascade = CascadeType.ALL, mappedBy = "book")
   private BookDetail details;
 
+  /**
+   * Gets details.
+   *
+   * @return the details
+   */
   public BookDetail getDetails() {
     return details;
   }
 
+  /**
+   * Sets details.
+   *
+   * @param details the details
+   */
   public void setDetails(BookDetail details) {
     this.details = details;
   }
