@@ -19,17 +19,32 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 
+/**
+ * The type Publisher controller.
+ */
 @RestController
 @RequestMapping(value = "/publishers")
 public class PublisherController {
 
   private final PublisherService publisherService;
 
+  /**
+   * Instantiates a new Publisher controller.
+   *
+   * @param publisherService the publisher service
+   */
   @Autowired
   public PublisherController(PublisherService publisherService) {
     this.publisherService = publisherService;
   }
 
+  /**
+   * Gets publisher by id.
+   *
+   * @param id the id
+   * @return the publisher by id
+   * @throws PublisherNotFoundException the publisher not found exception
+   */
   @GetMapping("/{id}")
   public PublisherDto getPublisherById(@PathVariable Long id) throws PublisherNotFoundException {
     return PublisherDto.fromEntity(
@@ -37,6 +52,11 @@ public class PublisherController {
     );
   }
 
+  /**
+   * Gets all publishers.
+   *
+   * @return the all publishers
+   */
   @GetMapping
   public List<PublisherDto> getAllPublishers() {
     List<Publisher> allPublishers = publisherService.findAll();
@@ -45,6 +65,12 @@ public class PublisherController {
         .toList();
   }
 
+  /**
+   * Create publisher publisher dto.
+   *
+   * @param publisherCreationDto the publisher creation dto
+   * @return the publisher dto
+   */
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public PublisherDto createPublisher(@RequestBody PublisherCreationDto publisherCreationDto) {
@@ -53,6 +79,14 @@ public class PublisherController {
     );
   }
 
+  /**
+   * Update publisher publisher dto.
+   *
+   * @param id                   the id
+   * @param publisherCreationDto the publisher creation dto
+   * @return the publisher dto
+   * @throws PublisherNotFoundException the publisher not found exception
+   */
   @PutMapping("/{id}")
   public PublisherDto updatePublisher(@PathVariable Long id,
                                       @RequestBody PublisherCreationDto publisherCreationDto
@@ -62,6 +96,13 @@ public class PublisherController {
     );
   }
 
+  /**
+   * Delete publisher by id publisher dto.
+   *
+   * @param id the id
+   * @return the publisher dto
+   * @throws PublisherNotFoundException the publisher not found exception
+   */
   @DeleteMapping("/{id}")
   public PublisherDto deletePublisherById(@PathVariable Long id) throws PublisherNotFoundException {
     return PublisherDto.fromEntity(

@@ -2,6 +2,9 @@ package com.betrybe.alexandria.controller.dto;
 
 import com.betrybe.alexandria.entity.BookDetail;
 
+/**
+ * The type Book detail dto.
+ */
 public record BookDetailDto(
     Long id,
     String summary,
@@ -9,6 +12,12 @@ public record BookDetailDto(
     String year,
     String isbn) {
 
+  /**
+   * From entity book detail dto.
+   *
+   * @param bookDetail the book detail
+   * @return the book detail dto
+   */
   public static BookDetailDto fromEntity(BookDetail bookDetail) {
     return new BookDetailDto(
         bookDetail.getId(),
