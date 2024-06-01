@@ -18,32 +18,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * The type Author controller.
- */
 @RestController
 @RequestMapping(value = "/authors")
 public class AuthorController {
 
   private final AuthorService authorService;
 
-  /**
-   * Instantiates a new Author controller.
-   *
-   * @param authorService the author service
-   */
   @Autowired
   public AuthorController(AuthorService authorService) {
     this.authorService = authorService;
   }
 
-  /**
-   * Gets author by id.
-   *
-   * @param id the id
-   * @return the author by id
-   * @throws AuthorNotFoundException the author not found exception
-   */
   @GetMapping("/{id}")
   public AuthorDto getAuthorById(@PathVariable Long id) throws AuthorNotFoundException {
     return AuthorDto.fromEntity(
@@ -51,11 +36,6 @@ public class AuthorController {
     );
   }
 
-  /**
-   * Gets all authors.
-   *
-   * @return the all authors
-   */
   @GetMapping
   public List<AuthorDto> getAllAuthors() {
     List<Author> allAuthors = authorService.findAll();
@@ -64,12 +44,6 @@ public class AuthorController {
         .toList();
   }
 
-  /**
-   * Create author author dto.
-   *
-   * @param authorCreationDto the author creation dto
-   * @return the author dto
-   */
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public AuthorDto createAuthor(@RequestBody AuthorCreationDto authorCreationDto) {
@@ -78,14 +52,6 @@ public class AuthorController {
     );
   }
 
-  /**
-   * Update author author dto.
-   *
-   * @param id                the id
-   * @param authorCreationDto the author creation dto
-   * @return the author dto
-   * @throws AuthorNotFoundException the author not found exception
-   */
   @PutMapping("/{id}")
   public AuthorDto updateAuthor(@PathVariable Long id,
                                 @RequestBody AuthorCreationDto authorCreationDto
@@ -95,13 +61,6 @@ public class AuthorController {
     );
   }
 
-  /**
-   * Delete author by id author dto.
-   *
-   * @param id the id
-   * @return the author dto
-   * @throws AuthorNotFoundException the author not found exception
-   */
   @DeleteMapping("/{id}")
   public AuthorDto deleteAuthorById(@PathVariable Long id) throws AuthorNotFoundException {
     return AuthorDto.fromEntity(
