@@ -2,18 +2,17 @@ package com.betrybe.alexandria.controller.dto;
 
 import com.betrybe.alexandria.entity.Book;
 
-/**
- * The type Book dto.
- */
-public record BookDto(Long id, String title, String genre) {
+public record BookDto(Long id, String title, String genre, PublisherDto publisher) {
 
-  /**
-   * From book dto.
-   *
-   * @param book the book
-   * @return the book dto
-   */
   public static BookDto from(Book book) {
-    return new BookDto(book.getId(), book.getTitle(), book.getGenre());
+    PublisherDto publisherDto = book.getPublisher() != null ?
+        PublisherDto.fromEntity(book.getPublisher()) : null;
+
+    return new BookDto(
+        book.getId(),
+        book.getTitle(),
+        book.getGenre(),
+        publisherDto
+    );
   }
 }
