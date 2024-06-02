@@ -25,32 +25,17 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 
-/**
- * The type Book controller.
- */
 @RestController
 @RequestMapping(value = "/books")
 public class BookController {
 
   private final BookService bookService;
 
-  /**
-   * Instantiates a new Book controller.
-   *
-   * @param bookService the book service
-   */
   @Autowired
   public BookController(BookService bookService) {
     this.bookService = bookService;
   }
 
-  /**
-   * Gets book id.
-   *
-   * @param id the id
-   * @return the book id
-   * @throws BookNotFoundException the book not found exception
-   */
   @GetMapping("/{id}")
   public BookDto getBookId(@PathVariable Long id) throws BookNotFoundException {
     return BookDto.fromEntity(
@@ -58,11 +43,6 @@ public class BookController {
     );
   }
 
-  /**
-   * Gets all books.
-   *
-   * @return the all books
-   */
   @GetMapping
   public List<BookDto> getAllBooks() {
     List<Book> books = bookService.findAll();
@@ -71,12 +51,6 @@ public class BookController {
         .toList();
   }
 
-  /**
-   * Create book book dto.
-   *
-   * @param bookCreationDto the book creation dto
-   * @return the book dto
-   */
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public BookDto createBook(@RequestBody BookCreationDto bookCreationDto) {
@@ -85,14 +59,6 @@ public class BookController {
     );
   }
 
-  /**
-   * Update book book dto.
-   *
-   * @param id                 the id
-   * @param bookCreationDtoDto the book creation dto dto
-   * @return the book dto
-   * @throws BookNotFoundException the book not found exception
-   */
   @PutMapping("/{id}")
   public BookDto updateBook(
       @PathVariable Long id,
@@ -102,13 +68,6 @@ public class BookController {
     );
   }
 
-  /**
-   * Delete book book dto.
-   *
-   * @param id the id
-   * @return the book dto
-   * @throws BookNotFoundException the book not found exception
-   */
   @DeleteMapping("/{id}")
   public BookDto deleteBook(@PathVariable Long id) throws BookNotFoundException {
     return BookDto.fromEntity(
@@ -116,14 +75,6 @@ public class BookController {
     );
   }
 
-  /**
-   * Create book detail book detail dto.
-   *
-   * @param bookId                the book id
-   * @param bookDetailCreationDto the book detail creation dto
-   * @return the book detail dto
-   * @throws BookNotFoundException the book not found exception
-   */
   @PostMapping("/{bookId}/detail")
   @ResponseStatus(HttpStatus.CREATED)
   public BookDetailDto createBookDetail(@PathVariable Long bookId,
@@ -133,14 +84,6 @@ public class BookController {
     );
   }
 
-  /**
-   * Gets book detail.
-   *
-   * @param bookId the book id
-   * @return the book detail
-   * @throws BookNotFoundException       the book not found exception
-   * @throws BookDetailNotFoundException the book detail not found exception
-   */
   @GetMapping("/{bookId}/detail")
   public BookDetailDto getBookDetail(@PathVariable Long bookId)
       throws BookNotFoundException, BookDetailNotFoundException {
@@ -149,15 +92,6 @@ public class BookController {
     );
   }
 
-  /**
-   * Update book detail book detail dto.
-   *
-   * @param bookId                the book id
-   * @param bookDetailCreationDto the book detail creation dto
-   * @return the book detail dto
-   * @throws BookDetailNotFoundException the book detail not found exception
-   * @throws BookNotFoundException       the book not found exception
-   */
   @PutMapping("/{bookId}/detail")
   public BookDetailDto updateBookDetail(@PathVariable Long bookId,
                                         @RequestBody BookDetailCreationDto bookDetailCreationDto)
@@ -167,14 +101,6 @@ public class BookController {
     );
   }
 
-  /**
-   * Remove book detail book detail dto.
-   *
-   * @param bookId the book id
-   * @return the book detail dto
-   * @throws BookDetailNotFoundException the book detail not found exception
-   * @throws BookNotFoundException       the book not found exception
-   */
   @DeleteMapping("/{bookId}/detail")
   public BookDetailDto removeBookDetail(@PathVariable Long bookId)
       throws BookDetailNotFoundException, BookNotFoundException {
@@ -183,42 +109,17 @@ public class BookController {
     );
   }
 
-  /**
-   * Sets book publisher.
-   *
-   * @param bookId      the book id
-   * @param publisherId the publisher id
-   * @return the book publisher
-   * @throws BookNotFoundException      the book not found exception
-   * @throws PublisherNotFoundException the publisher not found exception
-   */
   @PutMapping("/{bookId}/publisher/{publisherId}")
   public BookDto setBookPublisher(@PathVariable Long bookId, @PathVariable Long publisherId)
       throws BookNotFoundException, PublisherNotFoundException {
     return BookDto.fromEntity(bookService.setBookPublisher(bookId, publisherId));
   }
 
-  /**
-   * Remove book publisher book dto.
-   *
-   * @param bookId the book id
-   * @return the book dto
-   * @throws BookNotFoundException the book not found exception
-   */
   @DeleteMapping("/{bookId}/publisher")
   public BookDto removeBookPublisher(@PathVariable Long bookId) throws BookNotFoundException {
     return BookDto.fromEntity(bookService.removeBookPublisher(bookId));
   }
 
-  /**
-   * Add book author book dto.
-   *
-   * @param bookId   the book id
-   * @param authorId the author id
-   * @return the book dto
-   * @throws AuthorNotFoundException the author not found exception
-   * @throws BookNotFoundException   the book not found exception
-   */
   @PutMapping("/{bookId}/authors/{authorId}")
   public BookDto addBookAuthor(@PathVariable Long bookId,
                                @PathVariable Long authorId) throws AuthorNotFoundException, BookNotFoundException {
@@ -227,15 +128,6 @@ public class BookController {
     );
   }
 
-  /**
-   * Remove book author book dto.
-   *
-   * @param bookId   the book id
-   * @param authorId the author id
-   * @return the book dto
-   * @throws AuthorNotFoundException the author not found exception
-   * @throws BookNotFoundException   the book not found exception
-   */
   @DeleteMapping("/{bookId}/authors/{authorId}")
   public BookDto removeBookAuthor(@PathVariable Long bookId,
                                   @PathVariable Long authorId) throws AuthorNotFoundException, BookNotFoundException {

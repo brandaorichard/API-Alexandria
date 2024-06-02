@@ -14,9 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
-/**
- * The type Book service.
- */
 @Service
 public class BookService {
 
@@ -25,14 +22,6 @@ public class BookService {
   private final PublisherService publisherService;
   private final AuthorService authorService;
 
-  /**
-   * Instantiates a new Book service.
-   *
-   * @param bookRepository       the book repository
-   * @param bookDetailRepository the book detail repository
-   * @param publisherService     the publisher service
-   * @param authorService        the author service
-   */
   @Autowired
   public BookService(BookRepository bookRepository, BookDetailRepository bookDetailRepository,
                      PublisherService publisherService, AuthorService authorService) {
@@ -42,45 +31,19 @@ public class BookService {
     this.authorService = authorService;
   }
 
-  /**
-   * Find by id book.
-   *
-   * @param id the id
-   * @return the book
-   * @throws BookNotFoundException the book not found exception
-   */
   public Book findById(Long id) throws BookNotFoundException {
     return bookRepository.findById(id)
         .orElseThrow(BookNotFoundException::new);
   }
 
-  /**
-   * Find all list.
-   *
-   * @return the list
-   */
   public List<Book> findAll() {
     return bookRepository.findAll();
   }
 
-  /**
-   * Create book.
-   *
-   * @param book the book
-   * @return the book
-   */
   public Book create(Book book) {
     return bookRepository.save(book);
   }
 
-  /**
-   * Update book.
-   *
-   * @param id   the id
-   * @param book the book
-   * @return the book
-   * @throws BookNotFoundException the book not found exception
-   */
   public Book update(Long id, Book book) throws BookNotFoundException {
     Book bookFromDb = findById(id);
 
@@ -90,13 +53,6 @@ public class BookService {
     return bookRepository.save(bookFromDb);
   }
 
-  /**
-   * Delete by id book.
-   *
-   * @param id the id
-   * @return the book
-   * @throws BookNotFoundException the book not found exception
-   */
   public Book deleteById(Long id) throws BookNotFoundException {
     Book book = findById(id);
 
@@ -105,15 +61,7 @@ public class BookService {
     return book;
   }
 
-  /**
-   * Create book detail book detail.
-   *
-   * @param bookId     the book id
-   * @param bookDetail the book detail
-   * @return the book detail
-   * @throws BookNotFoundException the book not found exception
-   */
-// Book Details:
+  // Book Details:
   public BookDetail createBookDetail(Long bookId, BookDetail bookDetail)
       throws BookNotFoundException {
     Book book = findById(bookId);
@@ -122,14 +70,6 @@ public class BookService {
     return bookDetailRepository.save(bookDetail);
   }
 
-  /**
-   * Gets book detail.
-   *
-   * @param bookId the book id
-   * @return the book detail
-   * @throws BookNotFoundException       the book not found exception
-   * @throws BookDetailNotFoundException the book detail not found exception
-   */
   public BookDetail getBookDetail(Long bookId)
       throws BookNotFoundException, BookDetailNotFoundException {
     Book book = findById(bookId);
@@ -143,15 +83,6 @@ public class BookService {
     return bookDetailFromDb;
   }
 
-  /**
-   * Update book detail book detail.
-   *
-   * @param bookId     the book id
-   * @param bookDetail the book detail
-   * @return the book detail
-   * @throws BookNotFoundException       the book not found exception
-   * @throws BookDetailNotFoundException the book detail not found exception
-   */
   public BookDetail updateBookDetail(Long bookId, BookDetail bookDetail)
       throws BookNotFoundException, BookDetailNotFoundException {
     BookDetail bookDetailFromDb = getBookDetail(bookId);
@@ -164,14 +95,6 @@ public class BookService {
     return bookDetailRepository.save(bookDetailFromDb);
   }
 
-  /**
-   * Remove book detail book detail.
-   *
-   * @param bookId the book id
-   * @return the book detail
-   * @throws BookNotFoundException       the book not found exception
-   * @throws BookDetailNotFoundException the book detail not found exception
-   */
   public BookDetail removeBookDetail(Long bookId)
       throws BookNotFoundException, BookDetailNotFoundException {
     Book book = findById(bookId);
@@ -189,15 +112,6 @@ public class BookService {
     return bookDetail;
   }
 
-  /**
-   * Sets book publisher.
-   *
-   * @param bookId      the book id
-   * @param publisherId the publisher id
-   * @return the book publisher
-   * @throws BookNotFoundException      the book not found exception
-   * @throws PublisherNotFoundException the publisher not found exception
-   */
   public Book setBookPublisher(Long bookId, Long publisherId)
       throws BookNotFoundException, PublisherNotFoundException {
     Book book = findById(bookId);
@@ -208,13 +122,6 @@ public class BookService {
     return bookRepository.save(book);
   }
 
-  /**
-   * Remove book publisher book.
-   *
-   * @param bookId the book id
-   * @return the book
-   * @throws BookNotFoundException the book not found exception
-   */
   public Book removeBookPublisher(Long bookId) throws BookNotFoundException {
     Book book = findById(bookId);
 
@@ -223,16 +130,7 @@ public class BookService {
     return bookRepository.save(book);
   }
 
-  /**
-   * Add book author book.
-   *
-   * @param bookId   the book id
-   * @param authorId the author id
-   * @return the book
-   * @throws BookNotFoundException   the book not found exception
-   * @throws AuthorNotFoundException the author not found exception
-   */
-// authors
+  // authors
   public Book addBookAuthor(Long bookId, Long authorId)
     throws BookNotFoundException, AuthorNotFoundException {
     Book book = findById(bookId);
@@ -243,15 +141,6 @@ public class BookService {
     return bookRepository.save(book);
   }
 
-  /**
-   * Remove book author book.
-   *
-   * @param bookId   the book id
-   * @param authorId the author id
-   * @return the book
-   * @throws BookNotFoundException   the book not found exception
-   * @throws AuthorNotFoundException the author not found exception
-   */
   public Book removeBookAuthor(Long bookId, Long authorId)
       throws BookNotFoundException, AuthorNotFoundException {
     Book book = findById(bookId);
